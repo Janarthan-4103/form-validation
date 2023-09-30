@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <link rel="stylesheet"  href="stylesheet.css">
+</head>
+<body>
+    
+    <div class="container">
+        <form action="#" id="form" class="form" method="get" onsubmit="return validate()">
+     
+    <h1>Registration Form</h1>
+
+    <div class="form-group">
+        <label for="fname">First Name:</label>
+        <input type="text" id="fname" placeholder="Enter your First Name">
+        <p id="fname text"></p>
+    </div>
+    <div class="form-group">
+        <label for="lname">Last Name:</label>
+        <input type="text" id="lname" placeholder="Enter your Last Name">
+        <p id="lname text"></p>
+    </div>
+    <div class="form-group">
+        <label for="mobile">Mobile No:</label>
+        <input type="tel" maxlength="10" id="mobile" placeholder="Enter your Mobile No">
+        <p id="mobileno text"></p>
+    </div>
+    <div class="form-group">
+        <label for="mail">Email Id:</label>
+        <input type="text" id="mail" placeholder="someone@gmail.com">
+        <p id="mail text"></p>
+    </div>
+    <div class="form-group">
+        <label for="pswd">Password:</label>
+        <input type="password" id="pswd" placeholder="Enter your Password">
+        <!-- <i class="eye" id="togglePassword"></i> -->
+        <p class="para">*Atleast 6 character,1 lowercase & uppercase,1 number,1 special character.</p>
+        <p id="pw text"></p>
+    </div>
+    <div class="form-group">
+        <label for="pswd1">Confirm Password:</label>
+        <input type="password" id="pswd1" placeholder="Enter your Confirm Password">
+        <p id="pw1 text"></p>
+    </div>
+    <div class="form-gender">
+        <label for="gender">Gender:</label>
+        <input type="radio" name="gender" id="gendermale">Male
+        <input type="radio" name="gender" id="genderfemale">Female
+        <input type="radio" name="gender" id="genderothers">others
+        <p id="gender text"></p>
+    </div>
+    <div class="form-degree">
+        <label for="degree">Degree:</label>
+        <select name="degree" id="degree">
+        <option value="0">--Select--</option>
+        <option value="1">BCA</option>
+        <option value="2">Bsc IT</option>
+        <option value="3">Bsc CS</option>
+        <option value="4">Bsc CT</option>
+    </select>
+        <p id="degree text"></p>
+    </div>
+    <div class="form-language">
+        <label for="language">Language:</label>
+        <input type="checkbox" id="tamil" name="tamil" value="language">
+        <label for="tamil">Tamil</label>
+        <input type="checkbox" id="english" name="english" value="language">
+        <label for="english">English</label>
+        <input type="checkbox" id="kanadam" name="kanadam" value="language">
+        <label for="kanadam">Kanadam</label>
+        <p id="language text"></p>
+    </div>
+    <button type="submit">Submit</button>
+    </form>
+    </div>
+
+    <script>
+        function validate()
+        {
+            var fname=true;
+            var lname=true;
+            var phone= /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/;
+            var mail=/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            var gender=true;
+            var degree=true;
+            var language=true;
+            var pswd=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+            var pswd1=document.getElementById("pswd").value;
+            var pswd2=document.getElementById("pswd1").value;
+
+            if(document.getElementById("fname").value=="")
+            {
+                fname=false;
+                document.getElementById("fname text").innerHTML="Enter Your Frist Name";
+                document.getElementById("fname text").style.color="red";
+                document.getElementById("fname").style.borderColor="red";
+            }
+            else
+            {
+                fname=true;
+                document.getElementById("fname").style.borderColor="green";
+                document.getElementById("fname text").innerHTML="";
+            }
+
+            if(document.getElementById("lname").value=="")
+            {
+                lname=false;
+                document.getElementById("lname text").innerHTML="Enter Your Frist Name";
+                document.getElementById("lname text").style.color="red";
+                document.getElementById("lname").style.borderColor="red";
+            }
+            else
+            {
+                lname=true;
+                document.getElementById("lname").style.borderColor="green";
+                document.getElementById("lname text").innerHTML="";
+            }
+
+            if(document.getElementById("mobile").value=="")
+            {
+                mobile=false;
+                document.getElementById("mobileno text").innerHTML="Enter Your Mobile No";
+                document.getElementById("mobileno text").style.color="red";
+                document.getElementById("mobile").style.borderColor="red";
+            }
+            else if(phone.test(document.getElementById("mobile").value)==false)
+            {
+                document.getElementById("mobileno text").innerHTML="Not a vaild Mobile No";
+                document.getElementById("mobileno text").style.color="red";
+                document.getElementById("mobile").style.borderColor="red"; 
+            }
+            else
+            {
+                mobile=true;
+                document.getElementById("mobile").style.borderColor="green";
+                document.getElementById("mobileno text").innerHTML="";
+            }
+
+            if(document.getElementById("mail").value=="")
+            {
+                mail=false;
+                document.getElementById("mail text").innerHTML="Enter Your Email Id";
+                document.getElementById("mail text").style.color="red";
+                document.getElementById("mail").style.borderColor="red";
+            }
+            else if(mail.test(document.getElementById("mail").value)==false)
+            {
+                document.getElementById("mail text").innerHTML="Enter Your Email Id";
+                document.getElementById("mail text").style.color="red";
+                document.getElementById("mail").style.borderColor="red"; 
+            }
+            else
+            {
+                mail=true;
+                document.getElementById("mail").style.borderColor="green";
+                document.getElementById("mail text").innerHTML="";
+            }
+
+            if(document.getElementById("pswd").value=="")
+            {
+                
+                document.getElementById("pw text").innerHTML="Enter Your Password";
+                document.getElementById("pw text").style.color="red";
+                document.getElementById("pswd").style.borderColor="red";
+            }
+            else if(pswd.test(document.getElementById("pswd").value)==false)
+            {
+                document.getElementById("pw text").innerHTML="Enter valid Password";
+                document.getElementById("pw text").style.color="red";
+                document.getElementById("pswd").style.borderColor="red"; 
+            }
+            else
+            {
+                
+                document.getElementById("pswd").style.borderColor="green";
+                document.getElementById("pw text").innerHTML="";
+            }
+
+            if(pswd1=="")
+            {
+              
+                document.getElementById("pw1 text").innerHTML="Enter Your Confirm Password";
+                document.getElementById("pw1 text").style.color="red";
+                document.getElementById("pswd1").style.borderColor="red";
+            }
+            else if(pswd1!=pswd2)
+            {
+                document.getElementById("pw1 text").innerHTML="password mismatched";
+                document.getElementById("pw1 text").style.color="red";
+                document.getElementById("pswd1").style.borderColor="red";
+            }
+            else
+            {
+                
+                document.getElementById("pswd1").style.borderColor="green";
+                document.getElementById("pw1 text").innerHTML="";
+            }
+
+            if(document.getElementById("gendermale").checked !=true&&document.getElementById("genderfemale").checked !=true&&document.getElementById("genderothers").checked !=true)
+            {
+                gender=false;
+                document.getElementById("gender text").innerHTML="Select Your Gender";
+                document.getElementById("gender text").style.color="red";
+                //document.getElementById("gender").style.borderColor="red";
+            }
+            else
+            {
+                gender=true;
+                //document.getElementById("gender").style.borderColor="green";
+                document.getElementById("gender text").innerHTML="";
+            }
+
+            if(document.getElementById("degree").value=="0")
+            {
+                degree=false;
+                document.getElementById("degree text").innerHTML="Select Your Degree";
+                document.getElementById("degree text").style.color="red";
+                //document.getElementById("degree").style.borderColor="red";
+            }
+            else
+            {
+                degree=true;
+                //document.getElementById("degree").style.borderColor="green";
+                document.getElementById("degree text").innerHTML="";
+            }
+
+            if(document.getElementById("tamil").checked !=true&&document.getElementById("english").checked !=true&&document.getElementById("kanadam").checked !=true)
+            {
+                language=false;
+                document.getElementById("language text").innerHTML="Select Your Language";
+                document.getElementById("language text").style.color="red";
+            }
+            else
+            {
+                language=true;
+                document.getElementById("language text").innerHTML="";
+            }
+
+
+
+
+            if(fname==false || lname==false || mobile==false || mail==false || pswd==false || gender==false || degree==false || language==false)
+            {
+                return false
+            }
+            else
+            {
+                return true
+            }
+        }
+    </script>
+    
+</body>
+</html>
